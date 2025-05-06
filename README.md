@@ -71,4 +71,17 @@ Toda información informaremos por aqui y atraves de nuestra pagina web (pronta 
 
 ![image](https://github.com/user-attachments/assets/7ad1e5ca-5a6b-4b95-9dec-0c7954f3f9fe)
 
+
+
+![ProfesorInformatico](https://github.com/user-attachments/assets/bb550907-2960-48d6-8f27-c422d05665c8)
+
+![EnemigoUno](https://github.com/user-attachments/assets/f7f8edd8-352a-41b0-bc55-3f4b76b4b9ed)
+
+
+
+
+
+
+
+
 GRACIAS
