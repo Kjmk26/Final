@@ -10,14 +10,26 @@ public class ControlarDialogos : MonoBehaviour
     ListaTextos texto;
     [SerializeField] TextMeshProUGUI textoPantalla;
 
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+        colaDialogos = new Queue<string>();
+    }
     public void ActivarCartel(ListaTextos textoObjeto)
     {
         animator.SetBool("Cartel", true);
         texto = textoObjeto;
+        ActivaTexto();
     }
 
     public void ActivaTexto()
     {
+        if (texto == null)
+        {
+            Debug.LogWarning("Texto no asignado en ControlarDialogos.");
+            return;
+        }
+
         colaDialogos.Clear();
         foreach (string textoGuardar in texto.arrayTextos)
         {
@@ -36,6 +48,8 @@ public class ControlarDialogos : MonoBehaviour
 
         string fraseActual = colaDialogos.Dequeue();
         textoPantalla.text = fraseActual;
+
+        StartCoroutine(MostrarCaracteres(fraseActual));
     }
 
     IEnumerator MostrarCaracteres (string textoMostrar)
