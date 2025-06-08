@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>J.A.K.A - Aprende Programando</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        #hero-video-wrapper {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            transition: transform 0.3s ease-out;
+        }
+
+        /* Inicio fondo */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.594);
+            color: #ffffff;
+            position: relative;
+            z-index: 2;
+
+        }
+
+        /* menu */
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #00000026 !important;
+            padding-top: 2rem;
+            padding-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            z-index: 10;
+        }
+
+        /* logo */
+        .navbar-brand {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+        .navbar .navbar-brand {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 300px;
+        }
+
+
+        .navbar .navbar-collapse {
+            justify-content: center;
+        }
+
+        .navbar-nav .nav-item {
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .navbar-brand img {
+            max-height: 90px;
+        }
+
+        .navbar .navbar-brand img {
+            max-height: 40px;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 1rem;
+            padding: 0.25rem 0.75rem;
+        }
+
+
+        /* Nueva mecánica: puzzles de código */
+        .card.bg-secondary {
+            background-color: rgb(0, 255, 76) !important;
+            border: 1px solid #444;
+        }
+
+
+        .content-overlay {
+            position: relative;
+            z-index: 1;
+        }
+
+        .pixel-font {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem;
+        }
+
+        /* Títulos en rojo */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #ffffff;
+            /* Rojo puro */
+        }
+
+        /* Botones en rojo */
+        .btn-warning {
+            background-color: #d62717;
+            border-color: #d62717;
+            color: white;
+        }
+
+        .btn-outline-light {
+            border-color: #ffffff;
+            color: #ffffff;
+        }
+
+        .btn-outline-light:hover {
+            background-color: #51ff0040;
+            color: white;
+        }
+
+        /* Efecto de zoom al hacer clic */
+        .personaje-img {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Zoom suave al pasar el mouse */
+
+
+        .personaje-img:hover {
+            transform: scale(1.1);
+            z-index: 2;
+        }
+
+        .personaje-img.zoom {
+            transform: scale(1.2);
+            z-index: 2;
+        }
+
+        /* Fondo semitransparente para cada bloque */
+        .personaje-card {
+            /* background-color: rgba(255, 255, 255, 0.3); */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* box-shadow: 0 0 10px rgba(13, 13, 13, 0.31); */
+        }
+
+        /* Efecto hover para destacar bloque completo */
+        .personaje-card:hover {
+            transform: scale(1.02);
+            /* box-shadow: 0 0 25px rgba(0, 0, 0, 0.11); */
+        }
+
+        /* GIF */
+        .florecer-hero {
+            position: relative;
+            height: 70vh;
+            background: linear-gradient(90deg, #410000,/*  #004300, */ #000054); /* rojo -> verde -> azul */
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        .superpuesta {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            max-width: 800px;
+            height: auto;
+            z-index: 2;
+        }
+
+        .texto-hero {
+            position: relative;
+            z-index: 3;
+            color: white;
+            max-width: 700px;
+            margin-top: 15rem;
+        }
+
+        .texto-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px #ff0000;
+        }
+
+        .texto-hero .pequeño {
+            font-size: 1rem;
+            margin: 1rem 0;
+            
+        }
+
+        .pixel-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+/* 2DA BARRA  */
+
+        .features-gradient {
+  background: linear-gradient(90deg, #410000,/*  #004300, */ #000054); /* rojo -> verde -> azul */
+}
+
+.pixel-font {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+    </style>
+
+    <!-- Pixel font -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- HERO CON VIDEO LIMITADO SOLO A ESTA SECCIÓN -->
+    <div id="hero-video-wrapper">
+        <video autoplay muted loop class="video-bg" id="bgVideo">
+            <source src="JEPJEP.MOV" type="video/mp4">
+            <!-- Tu navegador no soporta video HTML5. -->
+        </video>
+        <nav class="navbar navbar-expand-lg navbar-dark shadow">
+            <div class="container-fluid d-flex justify-content-center align-items-center position-relative">
+
+                <!-- Botón hamburguesa para móviles -->
+                <button class="navbar-toggler position-absolute start-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav d-flex flex-row align-items-center">
+                        <!-- Inicio -->
+                        <li class="nav-item">
+                            <a class="nav-link px-2" href="#">Inicio</a>
+                        </li>
+
+                        <!-- Logo + Historia alineados en el centro -->
+                        <li class="nav-item d-flex align-items-center mx-2">
+                            <!-- <img src="image.png" alt="Logo" style="height: 110px; margin: 0 0.5rem;"> -->
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link px-2" href="#historia">Historia</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <!-- Botones a la derecha -->
+                <div class="position-absolute end-0 d-none d-lg-flex">
+                    <button class="btn btn-outline-light me-2">Ver Trailer</button>
+                    <button class="btn btn-warning">Jugar Demo</button>
+                </div>
+            </div>
+        </nav>
+
+
+
+        <!-- HERO SECTION -->
+        <header class="hero-section">
+            <div class="content-overlay">
+                <!--  <img src="tu-logo.png" alt="Logo JAKA" class="img-fluid my-4" style="max-width: 300px;"> -->
+
+                <img src="LOGO.png" alt="Logo" style="height: 310px; margin: 0 0.5rem;">
+                <h1 class="display-6 fw-bold mt-4">Un videojuego para aprender a programar... ¡combatiendo errores!</h1>
+                <p class="lead">Explora, aprende, resuelve puzzles y derrota enemigos mientras desarrollas tu
+                    pensamiento computacional.</p>
+                <div class="mt-3">
+                    <a href="#demo" class="btn btn-warning me-2">Probar ahora</a>
+                    <a href="#historia" class="btn btn-outline-light">Conocer más</a>
+                </div>
+            </div>
+        </header>
+    </div>
+    <!-- SECCIÓN DESTACADA -->
+    <section class="features-gradient text-white text-center py-5">
+        <div class="container">
+          <div class="row g-5">
+            <div class="col-md-4">
+              <h3 class="pixel-font">APRENDIZAJE</h3>
+              <p>Domina los fundamentos de la programación a través de mecánicas interactivas, sin necesidad de experiencia previa.</p>
+            </div>
+            <div class="col-md-4">
+              <h3 class="pixel-font">NARRATIVA</h3>
+              <p>Una historia envolvente con diálogos, decisiones y desafíos que acompañan tu camino como aprendiz de código.</p>
+            </div>
+            <div class="col-md-4">
+              <h3 class="pixel-font">BATALLAS LÓGICAS</h3>
+              <p>Enfréntate a enemigos que representan errores de código y resuélvelos aplicando estructuras reales como bucles y condicionales.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- ENEMIGOS -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center pixel-font mb-5" style="color: #ff0000;"></h2>
+            <div class="row text-center">
+
+                <!-- Enemigo: Syntax -->
+                <div class="col-md-3 mb-4">
+                    <div class="p-3 rounded-4 personaje-card">
+                        <img src="Enemigo.png" class="img-fluid mb-3 personaje-img" alt="Syntax">
+                        <h5 class="pixel-font" style="color:#d70000;">WORRTE</h5>
+                        <p class="pixel-font">Aparece en combates donde debes aplicar condicionales.¡Tener cuidado!</p>
+                        <!-- <p class="pixel-font"><small>Jefe enemigo · Batalla lógica</small></p> -->
+                    </div>
+                </div>
+
+                <!-- Enemigo: Debugger (opcional como enemigo) -->
+                <div class="col-md-3 mb-4">
+                    <div class="p-3 rounded-4 personaje-card">
+                        <img src="EEnemigo.png" class="img-fluid mb-3 personaje-img" alt="Debugger">
+                        <h5 class="pixel-font" style="color: #d70000;">DEBUGGER</h5>
+                        <p class="pixel-font">¡Cuidado con sus trampas lógicas!</p>
+                        <!-- <p class="pixel-font"><small>Enemigo técnico · Dilemas computacionales</small></p> -->
+                    </div>
+                </div>
+
+
+
+                <!-- Personaje 3 -->
+                <div class="col-md-3 mb-4">
+                    <div class="p-3 rounded-4 personaje-card">
+                        <img src="Enemigoo.png" class="img-fluid mb-3 personaje-img" alt="Syntax">
+                        <h5 class="pixel-font" style="color: #d70000;">SYNTAX</h5>
+                        <p class="pixel-font">Aparece en combates donde debes aplicar bucles.</p>
+                        <!-- <p class="pixel-font"><small>Jefe enemigo · Batalla lógica</small></p> -->
+                    </div>
+                </div>
+
+                <!-- Personaje 4 -->
+                <div class="col-md-3 mb-4">
+                    <div class="p-3 rounded-4 personaje-card">
+                        <img src="Enemigooo.png" class="img-fluid mb-3 personaje-img" alt="Loopa">
+                        <h5 class="pixel-font" style="color: #d70000;">MEGTA</h5>
+                        <p class="pixel-font">Aliado especialista en bucles. Te reta a resolver desafíos.</p>
+                        <!-- <p class="pixel-font"><small>Modo práctica · Minijuegos</small></p> -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SECCIÓN ESTILO HERO CON DOS IMÁGENES -->
+    <section class="florecer-hero d-flex align-items-center justify-content-center text-center">
+        <!-- Imagen superpuesta centrada -->
+        <img src="AnimA1.gif" alt="" class="superpuesta">
+
+        <!-- Texto sobre la imagen -->
+        <div class="texto-hero">
+            <h1 class="pixel-font">¡Empieza tu aventura AHORA!</h1>
+            <p>El camino se revela ante quienes lo buscan. Da los primeros pasos hacia una.</p>
+            <a href="#" class="btn btn-danger">PROBAR AHORA</a>
+        </div>
+    </section>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Efecto scroll parallax SOLO dentro del HERO
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const video = document.getElementById('bgVideo');
+            if (scrollY < window.innerHeight) {
+                video.style.transform = `translateY(${scrollY * -0.3}px)`;
+            } else {
+                video.style.transform = 'translateY(-30%)';
+            }
+        });
+    </script>
+</body>
+
+</html>
