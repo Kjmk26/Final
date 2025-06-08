@@ -1,43 +1,42 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PuertaCasas : MonoBehaviour
 {
-    public SpriteRenderer iconoRenderer;
-    public Sprite iconoE;
-
-    public string nombreEscenaDestino;
-    public string nombrePuntoLlegada; // El nombre del GameObject vacío en la nueva escena
+    public List<GameObject> objetosAnimados; // Lista de objetos a activar/desactivar
 
     private bool enZona = false;
 
     void Start()
     {
-        if (iconoRenderer != null)
-            iconoRenderer.enabled = false;
-        else
-            Debug.LogError("iconoRenderer no está asignado.");
+        foreach (GameObject obj in objetosAnimados)
+        {
+            if (obj != null)
+                obj.SetActive(false);
+        }
     }
 
     void Update()
     {
-        if (enZona)
+        if (enZona && Input.GetKeyDown(KeyCode.E))
         {
-            iconoRenderer.enabled = true;
-            iconoRenderer.sprite = iconoE;
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                PlayerPrefs.SetString("PuntoLlegada", nombrePuntoLlegada); // Guardar nombre del punto
-                SceneManager.LoadScene(nombreEscenaDestino); // Cargar la nueva escena
-            }
+            Debug.Log("Tecla E presionada.");
+            // Aquí puedes hacer algo, como cambiar de escena o reproducir sonido
         }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
+        {
             enZona = true;
+            foreach (GameObject obj in objetosAnimados)
+            {
+                if (obj != null)
+                    obj.SetActive(true);
+            }
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -45,8 +44,11 @@ public class PuertaCasas : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             enZona = false;
-            if (iconoRenderer != null)
-                iconoRenderer.enabled = false;
+            foreach (GameObject obj in objetosAnimados)
+            {
+                if (obj != null)
+                    obj.SetActive(false);
+            }
         }
     }
 }
