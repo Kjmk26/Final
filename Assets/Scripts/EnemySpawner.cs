@@ -9,6 +9,8 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.dialogoActivo) return;
+
         timer -= Time.deltaTime;
         if (timer <= 0f)
         {

@@ -18,6 +18,8 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.dialogoActivo) return;
+
         float distance = Vector2.Distance(transform.position, player.position);
 
         if (distance < attackRange)

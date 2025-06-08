@@ -13,6 +13,8 @@ public class MovimientoJugador : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.dialogoActivo) return;
+
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 

@@ -9,15 +9,29 @@ public class ControlarDialogos : MonoBehaviour
     private Queue<string> colaDialogos;
     ListaTextos texto;
     [SerializeField] TextMeshProUGUI textoPantalla;
+    private Coroutine corrutinaActual;
 
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+        colaDialogos = new Queue<string>();
+    }
     public void ActivarCartel(ListaTextos textoObjeto)
     {
         animator.SetBool("Cartel", true);
         texto = textoObjeto;
+        GameManager.dialogoActivo = true;
+        ActivaTexto();
     }
 
     public void ActivaTexto()
     {
+        if (texto == null)
+        {
+            Debug.LogWarning("Texto no asignado en ControlarDialogos.");
+            return;
+        }
+
         colaDialogos.Clear();
         foreach (string textoGuardar in texto.arrayTextos)
         {
@@ -35,7 +49,13 @@ public class ControlarDialogos : MonoBehaviour
         }
 
         string fraseActual = colaDialogos.Dequeue();
-        textoPantalla.text = fraseActual;
+
+        if (corrutinaActual != null)
+        {
+            StopCoroutine(corrutinaActual);
+        }
+
+        corrutinaActual = StartCoroutine(MostrarCaracteres(fraseActual));
     }
 
     IEnumerator MostrarCaracteres (string textoMostrar)
@@ -51,5 +71,11 @@ public class ControlarDialogos : MonoBehaviour
     void CierraCartel()
     {
         animator.SetBool("Cartel", false);
+        GameManager.dialogoActivo = false;
+    }
+
+    public bool EstaCartelActivo()
+    {
+        return animator.GetBool("Cartel");
     }
 }

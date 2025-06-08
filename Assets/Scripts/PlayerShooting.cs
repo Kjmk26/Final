@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.dialogoActivo) return;
+
         fireTimer -= Time.deltaTime;
 
         if (Input.GetButton("Fire1") && fireTimer <= 0f)
