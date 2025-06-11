@@ -78,4 +78,24 @@ public class ControlarDialogos : MonoBehaviour
     {
         return animator.GetBool("Cartel");
     }
+
+    IEnumerator EsperarFinAnimacionYCerrar()
+    {
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Close"))
+        {
+            yield return null;
+        }
+
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+        {
+            yield return null;
+        }
+
+        animator.SetBool("Cerrado", true);
+
+        GameManager.dialogoActivo = false;
+
+        yield return new WaitForSeconds(0.1f);
+        animator.SetBool("Cerrado", false);
+    }
 }

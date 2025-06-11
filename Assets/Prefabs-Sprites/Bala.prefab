@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 152288902530595918}
   - component: {fileID: 7123186826054182751}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Bala
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
